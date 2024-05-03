@@ -6,12 +6,14 @@
     </.link>
   </:actions>
 </.header>
+<div>First, create a number of clients. They will be appended to the bottom of the list.</div>
+<div>Refresh the page, they will be displayed them in ascending order based off their id.</div>
+<div>
+  You'll note that the order is effectively random instead of being k-sorted based off creation time.
+</div>
 
-<.table
-  id="clients"
-  rows={@streams.clients}
-  row_click={fn {_id, client} -> JS.navigate(~p"/#{client}") end}
->
+<.table id="clients" rows={@streams.clients} row_click={fn {_id, client} -> JS.navigate(~p"/#{client}") end}
+  >
   <:col :let={{_id, client}} label="Id">
     <%= client.id %>
   </:col>
@@ -25,22 +27,15 @@
     <.link patch={~p"/#{client}/edit"}>Edit</.link>
   </:action>
   <:action :let={{id, client}}>
-    <.link
-      phx-click={JS.push("delete", value: %{id: client.id}) |> hide("##{id}")}
+    <.link phx-click={JS.push("delete", value: %{id: client.id}) |> hide("##{id}")}
       data-confirm="Are you sure?"
-    >
+      >
       Delete
     </.link>
   </:action>
 </.table>
 
 <.modal :if={@live_action in [:new, :edit]} id="client-modal" show on_cancel={JS.patch(~p"/")}>
-  <.live_component
-    module={TypeidTestWeb.ClientLive.FormComponent}
-    id={@client.id || :new}
-    title={@page_title}
-    action={@live_action}
-    client={@client}
-    patch={~p"/"}
-  />
+  <.live_component module={TypeidTestWeb.ClientLive.FormComponent} id={@client.id || :new} title={@page_title}
+    action={@live_action} client={@client} patch={~p"/"} />
 </.modal>

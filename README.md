@@ -7,4 +7,4 @@ To use this example
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Create a few Clients and note that the ID is not k-sorted like expected.
+Create a few Clients and then refresh the page. Note that they are no longer in the same order as the ID is not k-sorted like expected.
