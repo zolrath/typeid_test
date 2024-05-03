@@ -11,6 +11,9 @@ config :typeid_test,
   ecto_repos: [TypeidTest.Repo],
   generators: [timestamp_type: :utc_datetime]
 
+config :typeid_elixir,
+  default_type: :binary_id
+
 # Configures the endpoint
 config :typeid_test, TypeidTestWeb.Endpoint,
   url: [host: "localhost"],

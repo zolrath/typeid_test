@@ -17,7 +17,12 @@ defmodule TypeidTestWeb.Router do
   scope "/", TypeidTestWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    live "/", ClientLive.Index, :index
+    live "/new", ClientLive.Index, :new
+    live "/:id/edit", ClientLive.Index, :edit
+
+    live "/:id", ClientLive.Show, :show
+    live "/:id/show/edit", ClientLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
