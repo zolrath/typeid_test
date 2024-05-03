@@ -18,7 +18,7 @@ defmodule TypeidTest.Clients do
 
   """
   def list_clients do
-    Repo.all(Client)
+    Repo.all(from c in Client, order_by: [asc: c.id])
   end
 
   @doc """
